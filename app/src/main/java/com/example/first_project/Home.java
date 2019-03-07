@@ -34,36 +34,36 @@ public class Home extends Fragment {
         textInputLayout_url = (TextInputLayout)v.findViewById(R.id.textlayout_url);
         editText_url=(TextInputEditText)v.findViewById(R.id.edittext_url);
 
-        connected= v.findViewById(R.id.textview_connect);
-        disconnected= v.findViewById(R.id.textview_disconnect);
-        subscribed = v.findViewById(R.id.textview_subscribe);
+//        connected= v.findViewById(R.id.textview_connect);
+//        disconnected= v.findViewById(R.id.textview_disconnect);
+//        subscribed = v.findViewById(R.id.textview_subscribe);
         Disconnect=(Button)v.findViewById(R.id.button_disconnect);
         Connect=(Button)v.findViewById(R.id.button_connect);
         Subscribe=(Button)v.findViewById(R.id.button_subscribe);
 
        status_green = getContext().getResources().getDrawable( R.drawable.green);
        status_red=getContext().getResources().getDrawable( R.drawable.red);
-        Button button_go= v.findViewById(R.id.button_go);
-       // button_go.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                url=textInputLayout_url.getEditText().getText().toString();
-//                mqtt= new MQTT(getContext(),url);
-//                int flag = mqtt.ClientConnect();
-//                connected.setText(""+flag);
-//                Log.d("flag connected or not ", "Connected "+flag);
-//
-//
-//                if(url.equals("0")){
-//                    Log.d("***** url ****",url);
-//                    editText_url.setCompoundDrawablesWithIntrinsicBounds(status_green,null,null,null);
-//                }else{
-//                    editText_url.setCompoundDrawablesWithIntrinsicBounds(status_red,null,null,null);
-//
-//                }
-//            }
-//        });
+        Connect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                url=textInputLayout_url.getEditText().getText().toString();
+                mqtt= new MQTT(getContext(),url);
+                int flag = mqtt.ClientConnect();
+                switch (flag){
+                    case 0 :
+                            break;
+                    case  1 : editText_url.setCompoundDrawablesWithIntrinsicBounds(status_green,null,null,null);
+                           Connect.setBackgroundColor();
+                            break;
+                    case 2 :editText_url.setCompoundDrawablesWithIntrinsicBounds(status_red,null,null,null);
+                        break;
+
+
+
+                }
+            }
+        });
 
         Subscribe.setOnClickListener(new View.OnClickListener() {
             @Override
