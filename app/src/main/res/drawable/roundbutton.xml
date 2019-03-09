@@ -11,7 +11,7 @@
     <!--</shape>-->
 
 
-    <item android:state_pressed="false">
+    <item>
     <shape android:shape="rectangle">
         <corners android:radius="1000dp" />
         <solid android:color="#F1F1F1" />
@@ -29,24 +29,5 @@
             android:topLeftRadius="8dp"/>
     </shape>
 </item>
-<item android:state_pressed="true">
-<shape android:shape="rectangle">
-    <corners android:radius="1000dp" />
-    <solid android:color="#3AA76D" />
-    <stroke
-        android:width="2dip"
-        android:color="#03ae3c" />
-    <padding
-        android:bottom="2dp"
-        android:left="2dp"
-        android:right="2dp"
-        android:top="2dp"  />
-    <corners android:bottomRightRadius="8dp"
-        android:bottomLeftRadius="8dp"
-        android:topRightRadius="8dp"
-        android:topLeftRadius="8dp"/>
-</shape>
-</item>
-
 
 </selector>

@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name=""></color>
-    <color name="colorPrimary">#03DAC6</color>
-    <color name="colorPrimaryDark">#16AB67</color>
-    <color name="colorAccent">#007C8A</color>
+    <color name="colorPrimary">#FAC83F</color>
+    <color name="lightGreen">#03DAC6</color>
+    <color name="colorPrimaryDark">#FFC107</color>
+    <color name="colorAccent">#3F51B5</color>
+    <color name="red">#FA3333</color>
+    <color name="white">#FCFAFA</color>
+    <color name="black">#080808</color>
+    <color name="buffered">#FF9800</color>
+    <color name="played">#FFEB3B</color>
+    <color name="scrubber">#9E9EEC</color>
+    <color name="unplayed">#FFFFFF</color>
 </resources>

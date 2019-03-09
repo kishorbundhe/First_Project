@@ -1,6 +1,5 @@
 package com.example.first_project;
 
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,8 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +17,7 @@ public class Home extends Fragment {
     View v;
     TextInputLayout textInputLayout_url;
     TextInputEditText editText_url;
-    Drawable status_green,status_red;
+    Drawable status_green,status_red,status_black;
     String url;
     MQTT mqtt;
     TextView connected, disconnected, subscribed;
@@ -43,6 +40,8 @@ public class Home extends Fragment {
 
        status_green = getContext().getResources().getDrawable( R.drawable.green);
        status_red=getContext().getResources().getDrawable( R.drawable.red);
+       status_black=getContext().getResources().getDrawable(R.drawable.black);
+
         Connect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,12 +50,18 @@ public class Home extends Fragment {
                 mqtt= new MQTT(getContext(),url);
                 int flag = mqtt.ClientConnect();
                 switch (flag){
-                    case 0 :
-                            break;
+                    case 0 :editText_url.setCompoundDrawablesWithIntrinsicBounds(status_red,null,null,null);
+                        Connect.setBackgroundColor(0xFFFA3333);
+                        break;
                     case  1 : editText_url.setCompoundDrawablesWithIntrinsicBounds(status_green,null,null,null);
-                           Connect.setBackgroundColor();
+                           Connect.setBackgroundColor(0xFF03DAC6);
+                                if(Disconnect.getBackground().equals(status_green)){
+                                    Disconnect.setBackgroundColor(0xFFFCFAFA);
+                                }
                             break;
-                    case 2 :editText_url.setCompoundDrawablesWithIntrinsicBounds(status_red,null,null,null);
+                    case 2 :
+                        editText_url.setCompoundDrawablesWithIntrinsicBounds(status_black,null,null,null);
+                        Connect.setBackgroundColor(0xFFFA3333);
                         break;
 
 
@@ -69,8 +74,21 @@ public class Home extends Fragment {
             @Override
             public void onClick(View v) {
                int flagsubscribed= mqtt.Subscribe("foo/bar");
-                Log.d("flag connected or not ", "Connected "+flagsubscribed);
-                subscribed.setText(""+flagsubscribed);
+                switch (flagsubscribed){
+                    case 0 :
+                        Subscribe.setBackgroundColor(0xFFFCFAFA);
+                        break;
+                    case  1 :
+                        Subscribe.setBackgroundColor(0xFF03DAC6);
+                        break;
+                    case 2 :
+                        Subscribe.setBackgroundColor(0xFF0C0C0C);
+
+                        break;
+
+
+
+                }
             }
         });
 
@@ -78,8 +96,26 @@ public class Home extends Fragment {
             @Override
             public void onClick(View v) {
                 int flagdisconnected= mqtt.Subscribe("foo/bar");
-                Log.d("flag connected or not ", "Connected "+flagdisconnected);
-                disconnected.setText(""+flagdisconnected);
+                switch (flagdisconnected){
+                    case 0 :
+                        Disconnect.setBackgroundColor(0xFFFCFAFA);
+
+                        break;
+                    case  1 :
+                        Disconnect.setBackgroundColor(0xFF03DAC6);
+                        Subscribe.setBackgroundColor(0xFFFCFAFA);
+                        Connect.setBackgroundColor(0xFFFCFAFA);
+                        editText_url.setCompoundDrawablesWithIntrinsicBounds(status_red,null,null,null);
+
+                        break;
+                    case 2 :
+                        Disconnect.setBackgroundColor(0xFF0C0C0C);
+
+                        break;
+
+
+
+                }
             }
         });
 

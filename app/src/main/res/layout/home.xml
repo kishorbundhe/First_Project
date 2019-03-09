@@ -53,7 +53,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textlayout_url"
-                android:layout_weight="1"                android:background="@drawable/roundbutton"
+                android:layout_weight="1"
+                android:background="@drawable/roundbutton"
                 android:text="Connect"
                 android:layout_marginLeft="10dp"/>
             <Button
@@ -247,7 +248,7 @@
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="100dp"
-                            android:src="@drawable/ic_food"
+                            android:src="@drawable/ic_remaining"
                             android:layout_weight="1"
                             />
 
