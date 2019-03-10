@@ -27,7 +27,7 @@ public class MQTT {
     static int qos = 1;
     IMqttMessageListener iMqttMessageListener;
 
-    static String urlformqqtconnection = "tcp://broker.hivemq.com:1883";
+    static String urlformqqtconnection;// = "tcp://broker.hivemq.com:1883";
 
     MQTT(Context context, String url){
 
@@ -46,7 +46,7 @@ public class MQTT {
 
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
-
+                Log.d("message recived",message.toString());
             }
 
             @Override

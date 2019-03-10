@@ -17,6 +17,7 @@ public class Graphic extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v=inflater.inflate(R.layout.graphic,container,false);
+
         return v;
     }
 }

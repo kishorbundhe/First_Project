@@ -216,9 +216,40 @@ public void Intialize(){
 
         @Override
         public void onPlayerError(ExoPlaybackException error) {
-            Toast.makeText(getApplicationContext(),
-                    "Something Went Wrong ",
-                    Toast.LENGTH_SHORT).show();
+
+            switch (error.type) {
+                case ExoPlaybackException.TYPE_SOURCE:
+                    Toast.makeText(getApplicationContext(),
+                            "Something Went Wrong "+error.getSourceException().getMessage(),
+                            Toast.LENGTH_SHORT).show();
+
+                    break;
+
+                case ExoPlaybackException.TYPE_RENDERER:
+
+                    Toast.makeText(getApplicationContext(),
+                            "Something Went Wrong "+error.getRendererException().getMessage(),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+
+                case ExoPlaybackException.TYPE_UNEXPECTED:
+                    Toast.makeText(getApplicationContext(),
+                            "Something Went Wrong "+error.getUnexpectedException().getMessage(),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                    default:Toast.makeText(getApplicationContext(),
+                            "Something Went Wrong "+error.getMessage(),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+            }
+
+
+
+
+
+
+
+
         }
 
 

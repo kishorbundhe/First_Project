@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Video extends Fragment  {
     TextInputLayout textInputLayout_url1;
@@ -34,8 +35,20 @@ public class Video extends Fragment  {
             button_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                url=editText_url1.getText().toString();
-                Log.d("heloo url ", "onCreateView: "+url);
+
+                try{
+                    url=url=editText_url1.getText().toString();
+                    Log.v("url value video",url);
+                    if (url==null){
+                        throw new Exception();
+                    }
+
+                }catch(Exception e){
+                    Toast.makeText(getContext(),
+                            " Url is NULL ",
+                            Toast.LENGTH_SHORT).show();
+                }
+
                 Intent intent = new Intent(getContext(),VideoPlaying.class);
                 intent.putExtra("url",url);
                 startActivity(intent);

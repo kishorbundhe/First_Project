@@ -73,7 +73,7 @@ public class Home extends Fragment {
         Subscribe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               int flagsubscribed= mqtt.Subscribe("foo/bar");
+               int flagsubscribed= mqtt.Subscribe("kishor");
                 switch (flagsubscribed){
                     case 0 :
                         Subscribe.setBackgroundColor(0xFFFCFAFA);
@@ -95,7 +95,7 @@ public class Home extends Fragment {
         Disconnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int flagdisconnected= mqtt.Subscribe("foo/bar");
+                int flagdisconnected= mqtt.Subscribe("kishor");
                 switch (flagdisconnected){
                     case 0 :
                         Disconnect.setBackgroundColor(0xFFFCFAFA);
