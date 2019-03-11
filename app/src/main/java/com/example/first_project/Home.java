@@ -7,11 +7,18 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+
+import static com.example.first_project.MQTT.client;
 
 public class Home extends Fragment {
     View v;
@@ -49,6 +56,28 @@ public class Home extends Fragment {
                 url=textInputLayout_url.getEditText().getText().toString();
                 mqtt= new MQTT(getContext(),url);
                 int flag = mqtt.ClientConnect();
+                client.setCallback(new MqttCallbackExtended() {
+                    @Override
+                    public void connectComplete(boolean reconnect, String serverURI) {
+
+                    }
+
+                    @Override
+                    public void connectionLost(Throwable cause) {
+
+                    }
+
+                    @Override
+                    public void messageArrived(String topic, MqttMessage message) throws Exception {
+                        Log.d("message recived",message.toString());
+                    }
+
+                    @Override
+                    public void deliveryComplete(IMqttDeliveryToken token) {
+
+                    }
+                });
+
                 switch (flag){
                     case 0 :editText_url.setCompoundDrawablesWithIntrinsicBounds(status_red,null,null,null);
                         Connect.setBackgroundColor(0xFFFA3333);

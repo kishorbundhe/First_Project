@@ -22,7 +22,7 @@ public class MQTT {
     static int flagdisconnected = 0;
     static String clientId;
     static IMqttToken token;
-    static MqttAndroidClient client;
+    public static MqttAndroidClient client;
     static String topic;
     static int qos = 1;
     IMqttMessageListener iMqttMessageListener;
@@ -33,27 +33,6 @@ public class MQTT {
 
         clientId = MqttClient.generateClientId();
         client = new MqttAndroidClient(context, url, clientId);
-        client.setCallback(new MqttCallbackExtended() {
-            @Override
-            public void connectComplete(boolean reconnect, String serverURI) {
-
-            }
-
-            @Override
-            public void connectionLost(Throwable cause) {
-
-            }
-
-            @Override
-            public void messageArrived(String topic, MqttMessage message) throws Exception {
-                Log.d("message recived",message.toString());
-            }
-
-            @Override
-            public void deliveryComplete(IMqttDeliveryToken token) {
-
-            }
-        });
 
 
 
