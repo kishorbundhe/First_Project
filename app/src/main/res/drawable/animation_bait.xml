@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+<item android:drawable="@drawable/ic_one" android:duration="90"/>
+    <item android:drawable="@drawable/ic_two" android:duration="90"/>
+    <item android:drawable="@drawable/ic_three" android:duration="90"/>
+    <item android:drawable="@drawable/ic_four" android:duration="90"/>
+    <item android:drawable="@drawable/ic_five" android:duration="90"/>
+    <item android:drawable="@drawable/ic_six" android:duration="90"/>
+    <item android:drawable="@drawable/ic_seven" android:duration="90"/>
+    <item android:drawable="@drawable/ic_eight" android:duration="90"/>
+    <item android:drawable="@drawable/ic_ten" android:duration="90"/>
+    <item android:drawable="@drawable/ic_eleven" android:duration="90"/>
+    <item android:drawable="@drawable/ic_twelve" android:duration="90"/>
+    <item android:drawable="@drawable/ic_thirteen" android:duration="90"/>
+    <item android:drawable="@drawable/ic_fourteen" android:duration="90"/>
+    <item android:drawable="@drawable/ic_fifteen" android:duration="90"/>
+    <item android:drawable="@drawable/ic_sixteen" android:duration="90"/>
+    <item android:drawable="@drawable/ic_seventeen" android:duration="90"/>
+    <item android:drawable="@drawable/ic_twenty1" android:duration="90"/>
+    <item android:drawable="@drawable/ic_twenty2" android:duration="90"/>
+    <item android:drawable="@drawable/ic_twenty3" android:duration="90"/>
+    <item android:drawable="@drawable/ic_twenty4" android:duration="90"/>
+
+</animation-list>

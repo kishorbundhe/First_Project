@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_twenty5" android:duration="90"/>
+    <item android:drawable="@drawable/ic_twenty6" android:duration="90"/>
+    <item android:drawable="@drawable/ic_twenty7" android:duration="90"/>
+    <item android:drawable="@drawable/ic_twenty8" android:duration="90"/>
+    <item android:drawable="@drawable/ic_twenty9" android:duration="90"/>
+    <item android:drawable="@drawable/ic_thirty" android:duration="90"/>
+    </animation-list>
