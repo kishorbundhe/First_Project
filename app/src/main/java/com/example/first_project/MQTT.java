@@ -23,17 +23,17 @@ public class MQTT {
     static String clientId;
     static IMqttToken token;
     public static MqttAndroidClient client;
-    static String topic;
+    public  String topic;
     static int qos = 1;
     IMqttMessageListener iMqttMessageListener;
 
     static String urlformqqtconnection;// = "tcp://broker.hivemq.com:1883";
 
-    MQTT(Context context, String url){
+    MQTT(Context context, String url,String topic){
 
         clientId = MqttClient.generateClientId();
         client = new MqttAndroidClient(context, url, clientId);
-
+        this.topic = topic;
 
 
 
@@ -70,9 +70,9 @@ public class MQTT {
     }
 
 
-    public int Subscribe(String topic) {
+    public int Subscribe() {
 
-        this.topic = topic;
+
 
         try {
             IMqttToken subToken = client.subscribe(topic, qos);
@@ -101,8 +101,7 @@ public class MQTT {
         return flagsubscribe;
     }
 
-    public int Unsubscribe(String topic) {
-        this.topic = topic;
+    public int Unsubscribe() {
         try {
             IMqttToken unsubToken = client.unsubscribe(topic);
             unsubToken.setActionCallback(new IMqttActionListener() {
@@ -128,8 +127,8 @@ public class MQTT {
         }
         return flagunsubscribe;
     }
-    public int Disconnected(String topic) {
-        this.topic = topic;
+    public int Disconnected() {
+//        Unsubscribe();
         try {
             IMqttToken disconToken = client.disconnect();
             disconToken.setActionCallback(new IMqttActionListener() {

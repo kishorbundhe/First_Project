@@ -1,12 +1,15 @@
 package com.example.first_project;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +25,18 @@ import static com.example.first_project.MQTT.client;
 
 public class Home extends Fragment {
     View v;
+    private long mLastClickTime = 0;
+    public String message_transfer= "1" ;
     TextInputLayout textInputLayout_url;
     TextInputEditText editText_url;
     Drawable status_green,status_red,status_black;
-    String url;
+    String url,Recievedmessage,temppreviousfishweight="", temppreviousfoodweight="";
+    int temppreviousremainingweight=12;
     MQTT mqtt;
-    TextView connected, disconnected, subscribed;
+    TextView connected, disconnected, subscribed,fishweight,foodweight,remainingweight;
     Button Disconnect, Connect , Subscribe;
+    String topic="kishor";
+    SendMessage SM;
     public Home() {
     }
 
@@ -44,6 +52,9 @@ public class Home extends Fragment {
         Disconnect=(Button)v.findViewById(R.id.button_disconnect);
         Connect=(Button)v.findViewById(R.id.button_connect);
         Subscribe=(Button)v.findViewById(R.id.button_subscribe);
+        fishweight=v.findViewById(R.id.text_fishweight);
+        foodweight=v.findViewById(R.id.text_foodweight);
+        remainingweight=v.findViewById(R.id.text_remainingweight);
 
        status_green = getContext().getResources().getDrawable( R.drawable.green);
        status_red=getContext().getResources().getDrawable( R.drawable.red);
@@ -54,7 +65,7 @@ public class Home extends Fragment {
             public void onClick(View v) {
 
                 url=textInputLayout_url.getEditText().getText().toString();
-                mqtt= new MQTT(getContext(),url);
+                mqtt= new MQTT(getContext(),url,topic);
                 int flag = mqtt.ClientConnect();
                 client.setCallback(new MqttCallbackExtended() {
                     @Override
@@ -69,7 +80,45 @@ public class Home extends Fragment {
 
                     @Override
                     public void messageArrived(String topic, MqttMessage message) throws Exception {
-                        Log.d("message recived",message.toString());
+                        Recievedmessage = new String(message.getPayload());
+                        Log.d("message recived",Recievedmessage);
+                                String spiltedarray[] =Recievedmessage.split(" ");
+                                String tempfish=spiltedarray[0];
+                                String tempfood=spiltedarray[1];
+                                int tempremaining=(Integer.parseInt(tempfish)+Integer.parseInt(tempfood));
+                        Log.d("recievedmessage", "messageArrived: "+tempremaining+"--"+temppreviousremainingweight);
+                                if(!tempfish.equals(temppreviousfishweight)){
+                                    fishweight.setText(tempfish);
+                                    temppreviousfishweight=tempfish;
+
+                                }
+
+                        if(!tempfood.equals(temppreviousfoodweight)){
+                            foodweight.setText(tempfood);
+                            temppreviousfoodweight=tempfood;
+
+
+                        }  if(!(tempremaining==temppreviousremainingweight)){
+                            remainingweight.setText(Integer.toString(tempremaining));
+                            temppreviousremainingweight=tempremaining;
+
+                        }
+
+                        if( (tempfish.equals("0"))&&(tempfood.equals("0"))) {
+                            message_transfer = "1";
+                            SM.sendData(message_transfer);
+
+                        }
+                        else if(!tempfish.equals("0")){
+                            message_transfer = "3";
+                            SM.sendData(message_transfer);
+                        }
+                        else{
+                            message_transfer = "2";
+                            SM.sendData(message_transfer);
+
+                        }
+                        Log.d("recievedmessage", "messageArrived: "+tempfish+"--"+tempfood+"  "+message_transfer);
                     }
 
                     @Override
@@ -84,7 +133,7 @@ public class Home extends Fragment {
                         break;
                     case  1 : editText_url.setCompoundDrawablesWithIntrinsicBounds(status_green,null,null,null);
                            Connect.setBackgroundColor(0xFF03DAC6);
-                                if(Disconnect.getBackground().equals(status_green)){
+                                if(Disconnect.getBackground().equals(0xFF03DAC6)){
                                     Disconnect.setBackgroundColor(0xFFFCFAFA);
                                 }
                             break;
@@ -102,7 +151,7 @@ public class Home extends Fragment {
         Subscribe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               int flagsubscribed= mqtt.Subscribe("kishor");
+               int flagsubscribed= mqtt.Subscribe();
                 switch (flagsubscribed){
                     case 0 :
                         Subscribe.setBackgroundColor(0xFFFCFAFA);
@@ -124,8 +173,16 @@ public class Home extends Fragment {
         Disconnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int flagdisconnected= mqtt.Subscribe("kishor");
-                switch (flagdisconnected){
+                int flagdisconnected=0;
+                    // mis-clicking prevention, using threshold of 1000 ms
+                    if (SystemClock.elapsedRealtime()-mLastClickTime < 5){
+                        flagdisconnected= mqtt.Disconnected();
+                    }if(SystemClock.elapsedRealtime()-mLastClickTime < 60000)
+                        {
+                            return;
+                        }
+                    mLastClickTime=SystemClock.elapsedRealtime();
+                    switch (flagdisconnected){
                     case 0 :
                         Disconnect.setBackgroundColor(0xFFFCFAFA);
 
@@ -151,4 +208,41 @@ public class Home extends Fragment {
 
         return v;
     }
+
+
+
+//    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//
+//        Button btnPassData = (Button) view.findViewById(R.id.btnPassData);
+//        final EditText inData = (EditText) view.findViewById(R.id.inMessage);
+//        btnPassData.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SM.sendData(inData.getText().toString().trim());
+//            }
+//        });
+//
+//    }
+
+    interface SendMessage {
+        void sendData(String message);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            SM = (SendMessage) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException("Error in retrieving data. Please try again");
+        }
+    }
 }
+
+
+
+
+
+
