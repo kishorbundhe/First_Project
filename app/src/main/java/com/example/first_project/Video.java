@@ -16,41 +16,42 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class Video extends Fragment  {
+public class Video extends Fragment {
     TextInputLayout textInputLayout_url1;
     TextInputEditText editText_url1;
     String url;
     Button button_play;
     View rootView;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-         rootView = inflater.inflate(R.layout.video, container, false);
-        editText_url1=rootView.findViewById(R.id.text_input_url);
+        rootView = inflater.inflate(R.layout.video, container, false);
+        editText_url1 = rootView.findViewById(R.id.text_input_url);
 
-            //
-      //  url=textInputLayout_url.getEditText().getText().toString();
+        //
+        //  url=textInputLayout_url.getEditText().getText().toString();
 
-            button_play= rootView.findViewById(R.id.button_play);
-            button_play.setOnClickListener(new View.OnClickListener() {
+        button_play = rootView.findViewById(R.id.button_play);
+        button_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                try{
-                    url=url=editText_url1.getText().toString();
-                    Log.v("url value video",url);
-                    if (url==null){
+                try {
+                    url = url = editText_url1.getText().toString();
+                    Log.v("url value video", url);
+                    if (url == null) {
                         throw new Exception();
                     }
 
-                }catch(Exception e){
+                } catch (Exception e) {
                     Toast.makeText(getContext(),
                             " Url is NULL ",
                             Toast.LENGTH_SHORT).show();
                 }
 
-                Intent intent = new Intent(getContext(),VideoPlaying.class);
-                intent.putExtra("url",url);
+                Intent intent = new Intent(getContext(), VideoPlaying.class);
+                intent.putExtra("url", url);
                 startActivity(intent);
             }
         });

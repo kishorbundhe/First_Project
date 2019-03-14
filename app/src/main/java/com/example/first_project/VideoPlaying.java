@@ -1,4 +1,5 @@
 package com.example.first_project;
+
 import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
@@ -53,7 +54,6 @@ public class VideoPlaying extends AppCompatActivity {
     private static final DefaultBandwidthMeter BANDWIDTH_METER = new DefaultBandwidthMeter();
 
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,21 +61,20 @@ public class VideoPlaying extends AppCompatActivity {
 
         playerview = (PlayerView) findViewById(R.id.video_view);
         loading = (ProgressBar) findViewById(R.id.loading);
-        url=getIntent().getStringExtra("url");
-        try{
-            url=getIntent().getStringExtra("url");
-            Log.v("url Vlue******88**",url);
-            if (url==null){
+        url = getIntent().getStringExtra("url");
+        try {
+            url = getIntent().getStringExtra("url");
+            Log.v("url Vlue******88**", url);
+            if (url == null) {
                 throw new Exception();
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
             Toast.makeText(getApplicationContext(),
                     " Url is NULL ",
                     Toast.LENGTH_SHORT).show();
         }
     }
-
 
 
     @Override
@@ -100,7 +99,7 @@ public class VideoPlaying extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
     }
 
-   // @Override
+    // @Override
 //    public void onStart() {
 //        super.onStart();
 //        TrackSelection.Factory adaptiveTrackSelection = new AdaptiveTrackSelection.Factory(new DefaultBandwidthMeter());
@@ -146,131 +145,127 @@ public class VideoPlaying extends AppCompatActivity {
             player = null;
         }
     }
-public void Intialize(){
-    TrackSelection.Factory adaptiveTrackSelection = new AdaptiveTrackSelection.Factory(new DefaultBandwidthMeter());
-    player = ExoPlayerFactory.newSimpleInstance(
-            new DefaultRenderersFactory(this),
-            new DefaultTrackSelector(adaptiveTrackSelection),
-            new DefaultLoadControl());
 
-    //init the player
-    playerview.setPlayer(player);
+    public void Intialize() {
+        TrackSelection.Factory adaptiveTrackSelection = new AdaptiveTrackSelection.Factory(new DefaultBandwidthMeter());
+        player = ExoPlayerFactory.newSimpleInstance(
+                new DefaultRenderersFactory(this),
+                new DefaultTrackSelector(adaptiveTrackSelection),
+                new DefaultLoadControl());
 
-    //-------------------------------------------------
-    DefaultBandwidthMeter defaultBandwidthMeter = new DefaultBandwidthMeter();
-    // Produces DataSource instances through which media data is loaded.
-    DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this,
-            Util.getUserAgent(this, "Exo2"), defaultBandwidthMeter);
+        //init the player
+        playerview.setPlayer(player);
 
-    //-----------------------------------------------
-    //Create media source
-    //String hls_url = "YOUR STREAMING URL HERE";
+        //-------------------------------------------------
+        DefaultBandwidthMeter defaultBandwidthMeter = new DefaultBandwidthMeter();
+        // Produces DataSource instances through which media data is loaded.
+        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this,
+                Util.getUserAgent(this, "Exo2"), defaultBandwidthMeter);
 
-    url=getIntent().getStringExtra("url");
-    Log.v("URL*******",url);
-    Uri uri = Uri.parse(url);
-    //Handler mainHandler = new Handler();
+        //-----------------------------------------------
+        //Create media source
+        //String hls_url = "YOUR STREAMING URL HERE";
 
-
-    ExtractorMediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
+        url = getIntent().getStringExtra("url");
+        Log.v("URL*******", url);
+        Uri uri = Uri.parse(url);
+        //Handler mainHandler = new Handler();
 
 
-    player.setPlayWhenReady(playWhenReady);
-    player.addListener(new Player.EventListener() {
-        @Override
-        public void onTimelineChanged(Timeline timeline, Object manifest, int reason) {
+        ExtractorMediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
 
-        }
 
-        @Override
-        public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
+        player.setPlayWhenReady(playWhenReady);
+        player.addListener(new Player.EventListener() {
+            @Override
+            public void onTimelineChanged(Timeline timeline, Object manifest, int reason) {
 
-        }
-
-        @Override
-        public void onLoadingChanged(boolean isLoading) {
-
-        }
-
-        @Override
-        public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-            switch (playbackState) {
-                case ExoPlayer.STATE_READY:
-                    loading.setVisibility(View.GONE);
-                    break;
-                case ExoPlayer.STATE_BUFFERING:
-                    loading.setVisibility(View.VISIBLE);
-                    break;
-            }
-        }
-
-        @Override
-        public void onRepeatModeChanged(int repeatMode) {
-
-        }
-
-        @Override
-        public void onShuffleModeEnabledChanged(boolean shuffleModeEnabled) {
-
-        }
-
-        @Override
-        public void onPlayerError(ExoPlaybackException error) {
-
-            switch (error.type) {
-                case ExoPlaybackException.TYPE_SOURCE:
-                    Toast.makeText(getApplicationContext(),
-                            "Something Went Wrong "+error.getSourceException().getMessage(),
-                            Toast.LENGTH_SHORT).show();
-
-                    break;
-
-                case ExoPlaybackException.TYPE_RENDERER:
-
-                    Toast.makeText(getApplicationContext(),
-                            "Something Went Wrong "+error.getRendererException().getMessage(),
-                            Toast.LENGTH_SHORT).show();
-                    break;
-
-                case ExoPlaybackException.TYPE_UNEXPECTED:
-                    Toast.makeText(getApplicationContext(),
-                            "Something Went Wrong "+error.getUnexpectedException().getMessage(),
-                            Toast.LENGTH_SHORT).show();
-                    break;
-                    default:Toast.makeText(getApplicationContext(),
-                            "Something Went Wrong "+error.getMessage(),
-                            Toast.LENGTH_SHORT).show();
-                    break;
             }
 
+            @Override
+            public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
+
+            }
+
+            @Override
+            public void onLoadingChanged(boolean isLoading) {
+
+            }
+
+            @Override
+            public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+                switch (playbackState) {
+                    case ExoPlayer.STATE_READY:
+                        loading.setVisibility(View.GONE);
+                        break;
+                    case ExoPlayer.STATE_BUFFERING:
+                        loading.setVisibility(View.VISIBLE);
+                        break;
+                }
+            }
+
+            @Override
+            public void onRepeatModeChanged(int repeatMode) {
+
+            }
+
+            @Override
+            public void onShuffleModeEnabledChanged(boolean shuffleModeEnabled) {
+
+            }
+
+            @Override
+            public void onPlayerError(ExoPlaybackException error) {
+
+                switch (error.type) {
+                    case ExoPlaybackException.TYPE_SOURCE:
+                        Toast.makeText(getApplicationContext(),
+                                "Something Went Wrong " + error.getSourceException().getMessage(),
+                                Toast.LENGTH_SHORT).show();
+
+                        break;
+
+                    case ExoPlaybackException.TYPE_RENDERER:
+
+                        Toast.makeText(getApplicationContext(),
+                                "Something Went Wrong " + error.getRendererException().getMessage(),
+                                Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case ExoPlaybackException.TYPE_UNEXPECTED:
+                        Toast.makeText(getApplicationContext(),
+                                "Something Went Wrong " + error.getUnexpectedException().getMessage(),
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        Toast.makeText(getApplicationContext(),
+                                "Something Went Wrong " + error.getMessage(),
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                }
 
 
+            }
 
 
+            @Override
+            public void onPositionDiscontinuity(int reason) {
 
+            }
 
+            @Override
+            public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
 
-        }
+            }
 
+            @Override
+            public void onSeekProcessed() {
 
-        @Override
-        public void onPositionDiscontinuity(int reason) {
+            }
+        });
+        player.seekTo(currentWindow, playbackPosition);
+        player.prepare(mediaSource, true, false);
 
-        }
-
-        @Override
-        public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
-
-        }
-
-        @Override
-        public void onSeekProcessed() {
-
-        }
-    });
-    player.seekTo(currentWindow, playbackPosition);
-    player.prepare(mediaSource, true, false);
-
-}
+    }
 
 }

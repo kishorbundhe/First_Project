@@ -28,5 +28,8 @@
 <item name="android:src">@drawable/ic_previous</item>
 <item name="android:contentDescription">@string/exo_controls_previous_description</item>
 </style>
+    <style name="RedAccent" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorAccent">#03A9F4</item>
+    </style>
 
 </resources>

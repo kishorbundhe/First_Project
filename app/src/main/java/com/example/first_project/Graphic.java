@@ -13,9 +13,10 @@ import android.widget.ImageView;
 
 public class Graphic extends Fragment {
     View v;
-    static String message_recieved="1";
+    static String message_recieved = "1";
     AnimationDrawable anim;
     ImageView imageView;
+
     public Graphic() {
     }
 
@@ -25,20 +26,12 @@ public class Graphic extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 //         message_transfer = getArguments().getString("key");
-        v=inflater.inflate(R.layout.graphic,container,false);
-
-
-
-
-
-
-
-
-
+        v = inflater.inflate(R.layout.graphic, container, false);
 
 
         return v;
     }
+
     protected void displayReceivedData(String message) {
         message_recieved = message;
         Log.d("**********8", message);
@@ -61,7 +54,8 @@ public class Graphic extends Fragment {
             imageView.setBackgroundResource(R.drawable.animation_caught);
             anim = (AnimationDrawable) imageView.getBackground();
             anim.start();
-        }if (message_recieved.equals("1")) {
+        }
+        if (message_recieved.equals("1")) {
             imageView.setBackgroundResource(R.drawable.ic_one);
         }
 

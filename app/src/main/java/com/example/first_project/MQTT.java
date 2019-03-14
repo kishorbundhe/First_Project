@@ -23,28 +23,24 @@ public class MQTT {
     static String clientId;
     static IMqttToken token;
     public static MqttAndroidClient client;
-    public  String topic;
+    public String topic;
     static int qos = 1;
     IMqttMessageListener iMqttMessageListener;
+    IMqttToken disconToken;
 
     static String urlformqqtconnection;// = "tcp://broker.hivemq.com:1883";
 
-    MQTT(Context context, String url,String topic){
+    MQTT(Context context, String url, String topic) {
 
         clientId = MqttClient.generateClientId();
         client = new MqttAndroidClient(context, url, clientId);
         this.topic = topic;
 
 
-
     }
 
 
-
-
-
-    public int ClientConnect( ) {
-
+    public int ClientConnect() {
 
 
         try {
@@ -73,12 +69,10 @@ public class MQTT {
     public int Subscribe() {
 
 
-
         try {
             IMqttToken subToken = client.subscribe(topic, qos);
             subToken.setActionCallback(new IMqttActionListener() {
                 @Override
-
 
 
                 public void onSuccess(IMqttToken asyncActionToken) {
@@ -127,15 +121,20 @@ public class MQTT {
         }
         return flagunsubscribe;
     }
+
     public int Disconnected() {
 //        Unsubscribe();
+
         try {
-            IMqttToken disconToken = client.disconnect();
+            if (disconToken == null) {
+                disconToken = client.disconnect();
+            }
+
             disconToken.setActionCallback(new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                     // we are now successfully disconnected
-                    flagdisconnected=1;
+                    flagdisconnected = 1;
                 }
 
 
@@ -143,14 +142,15 @@ public class MQTT {
                 public void onFailure(IMqttToken asyncActionToken,
                                       Throwable exception) {
                     // something went wrong, but probably we are disconnected anyway
-                    flagdisconnected=0;
+                    flagdisconnected = 0;
                 }
             });
         } catch (MqttException e) {
-            flagdisconnected=2;
+            flagdisconnected = 2;
         }
 
-    return flagdisconnected;
+
+        return flagdisconnected;
     }
 
 }
