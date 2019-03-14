@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/graphic_container">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/graphic_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <TextView
         android:id="@+id/section_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Graphic"
-        ></TextView>
+        android:text="Graphic"></TextView>
+
     <ImageView
+        android:id="@+id/fish_status"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#00BCD4"
-        android:id="@+id/fish_status"/>
+        android:background="#00BCD4" />
 </RelativeLayout>

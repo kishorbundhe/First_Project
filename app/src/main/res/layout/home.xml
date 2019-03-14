@@ -1,303 +1,300 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:card_view="http://schemas.android.com/tools"
-    android:weightSum="3"
-    android:orientation="vertical"
     android:background="#F1E75E"
-    >
-        <RelativeLayout
+    android:orientation="vertical"
+    android:weightSum="3">
+
+    <RelativeLayout
+        android:id="@+id/relativelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textlayout_url"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            app:boxStrokeColor="#484747"
+            app:errorEnabled="true">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edittext_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/red"
+                android:drawablePadding="10dp"
+                android:hint="@string/URL"
+                android:paddingLeft="10dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="#716D6D"
+
+                />
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textlayout_url"
             android:orientation="horizontal"
-            android:id="@+id/relativelayout"
-            android:layout_weight="1">
+            android:padding="10dp"
+            android:weightSum="3">
 
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textlayout_url"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:boxStrokeColor="#484747"
-                app:errorEnabled="true"
-                android:layout_marginBottom="20dp">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/edittext_url"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/red"
-                    android:drawablePadding="10dp"
-                    android:hint="@string/URL"
-                    android:paddingLeft="10dp"
-                    android:singleLine="true"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textColorHint="#716D6D"
-
-                    />
-            </android.support.design.widget.TextInputLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/buttons"
-                android:padding="10dp"
-                android:weightSum="3"
-                android:orientation="horizontal"
-                android:layout_below="@+id/textlayout_url">
             <Button
                 android:id="@+id/button_connect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textlayout_url"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/roundbutton"
-                android:text="Connect"
-                android:layout_marginLeft="10dp"/>
+                android:text="Connect" />
+
             <Button
                 android:id="@+id/button_subscribe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textlayout_url"
-               android:layout_weight="1"
+                android:layout_weight="1"
                 android:background="@drawable/roundbutton"
                 android:text="Subscribe" />
+
             <Button
                 android:id="@+id/button_disconnect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/roundbutton"
-                android:text="Disconnect"
-                android:layout_marginRight="10dp"/>
-                <ProgressBar
+                android:text="Disconnect" />
+
+            <ProgressBar
+                android:id="@+id/disconnect_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/RedAccent"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/buttons"
+            android:layout_centerHorizontal="true"
+
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:theme="@style/RedAccent"
-                    android:visibility="gone"
-                    android:id="@+id/disconnect_progress"
-                    />
+                    android:layout_gravity="center"
+                    android:text="Value of the Weight "
+                    android:textColor="#393737"
+                    android:textSize="20sp" />
 
 
-                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
+        <GridLayout
+            android:id="@+id/grid1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:alignmentMode="alignMargins"
+            android:columnCount="2"
+            android:columnOrderPreserved="false"
+            android:rowCount="1">
 
             <android.support.v7.widget.CardView
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
                 android:layout_margin="10dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="10dp">
 
-                android:id="@+id/title"
-                android:layout_centerHorizontal="true"
-
-                android:layout_below="@+id/buttons"
-                >
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="15dp">
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="4dp"
+                    android:orientation="vertical"
+                    android:padding="4dp"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_fish" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Value of the Weight "
-                        android:textColor="#393737"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:text="WEIGHT"
+                        android:textColor="#141414"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/text_fishweight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:textColor="#4D141414"
                         android:textSize="20sp" />
 
 
-
                 </LinearLayout>
+
+
             </android.support.v7.widget.CardView>
 
-            <GridLayout
-                android:layout_width="match_parent"
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/title"
-                android:id="@+id/grid1"
-                android:rowCount="1"
-                android:columnCount="2"
-                android:alignmentMode="alignMargins"
-                android:columnOrderPreserved="false"
-                >
-
-                    <android.support.v7.widget.CardView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    android:layout_margin="10dp"
-                    app:cardCornerRadius="18dp"
-                    app:cardElevation="10dp"
-                    >
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:weightSum="3"
-                        android:orientation="vertical"
-                        android:layout_gravity="center_horizontal"
-                        android:padding="4dp"
-                        android:layout_margin="4dp">
-                        <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:src="@drawable/ic_fish"
-                            android:layout_weight="1"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                           android:text="WEIGHT"
-                            android:layout_weight="1"
-                            android:textSize="10sp"
-                            android:textColor="#141414"
-                            android:layout_gravity="center_horizontal"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/text_fishweight"
-                            android:layout_weight="1"
-                            android:textSize="20sp"
-                            android:textColor="#4D141414"
-                            android:layout_gravity="center_horizontal"
-                            />
-
-
-                    </LinearLayout>
-
-
-                </android.support.v7.widget.CardView>
-                <android.support.v7.widget.CardView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    android:layout_margin="10dp"
-                    app:cardCornerRadius="18dp"
-                    app:cardElevation="10dp"
-                    >
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:weightSum="3"
-                        android:orientation="vertical"
-                        android:layout_gravity="center_horizontal"
-                        android:padding="4dp"
-                        android:layout_margin="4dp">
-                        <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="100dp"
-                            android:src="@drawable/ic_food"
-                            android:layout_weight="1"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="WEIGHT"
-
-                            android:layout_weight="1"
-                            android:textSize="10sp"
-                            android:textColor="#141414"
-                            android:layout_gravity="center_horizontal"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/text_foodweight"
-                            android:layout_weight="1"
-                            android:textSize="20sp"
-                            android:textColor="#4D141414"
-                            android:layout_gravity="center_horizontal"
-                            />
-
-
-                    </LinearLayout>
-
-
-
-                </android.support.v7.widget.CardView>
-
-            </GridLayout>
-
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/grid1"
-                android:rowCount="1"
-                android:columnCount="1"
-                android:alignmentMode="alignMargins"
-                android:columnOrderPreserved="false"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
                 android:layout_margin="10dp"
-                >
+                app:cardCornerRadius="18dp"
+                app:cardElevation="10dp">
 
-                <android.support.v7.widget.CardView
-                    android:layout_height="wrap_content"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    android:layout_margin="10dp"
-                    app:cardCornerRadius="18dp"
-                    app:cardElevation="10dp"
-                    android:layout_row="0"
-                    android:layout_column="0">
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="4dp"
+                    android:orientation="vertical"
+                    android:padding="4dp"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_food" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:weightSum="3"
-                        android:orientation="horizontal"
-                        android:padding="4dp"
-                        android:layout_margin="4dp">
-                        <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="100dp"
-                            android:src="@drawable/ic_remaining"
-                            android:layout_weight="1"
-                            />
+                        android:layout_gravity="center_horizontal"
+
+                        android:layout_weight="1"
+                        android:text="WEIGHT"
+                        android:textColor="#141414"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/text_foodweight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:textColor="#4D141414"
+                        android:textSize="20sp" />
 
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="20dp"
-                            >
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+        </GridLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/grid1"
+            android:layout_margin="10dp"
+            android:alignmentMode="alignMargins"
+            android:columnCount="1"
+            android:columnOrderPreserved="false"
+            android:rowCount="1">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_rowWeight="1"
+                android:layout_column="0"
+                android:layout_columnWeight="1"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_remaining" />
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TOTAL WEIGHT"
-
-                            android:textSize="20sp"
-                            android:textColor="#141414"
                             android:layout_gravity="center_horizontal"
-                            />
+
+                            android:text="TOTAL WEIGHT"
+                            android:textColor="#141414"
+                            android:textSize="20sp" />
+
                         <TextView
+                            android:id="@+id/text_remainingweight"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="10"
-                            android:id="@+id/text_remainingweight"
-                            android:layout_weight="1"
-                            android:textSize="30sp"
-                            android:textColor="#4D141414"
                             android:layout_gravity="center_horizontal"
-                            />
-                        </LinearLayout>
-
+                            android:layout_weight="1"
+                            android:text="10"
+                            android:textColor="#4D141414"
+                            android:textSize="30sp" />
                     </LinearLayout>
 
+                </LinearLayout>
 
 
-                </android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>
 
 
+        </GridLayout>
 
 
-            </GridLayout>
-
-
-        </RelativeLayout>
+    </RelativeLayout>
 </ScrollView>

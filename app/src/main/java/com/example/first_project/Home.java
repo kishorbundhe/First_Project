@@ -31,7 +31,7 @@ public class Home extends Fragment {
     public String message_transfer = "1";
     TextInputLayout textInputLayout_url;
     TextInputEditText editText_url;
-    Drawable status_green, status_red, status_black;
+    Drawable status_green, status_red, status_black, roundbutton;
     String url, Recievedmessage, temppreviousfishweight = "", temppreviousfoodweight = "";
     int temppreviousremainingweight = 12;
     MQTT mqtt;
@@ -42,6 +42,7 @@ public class Home extends Fragment {
     ProgressBar progress;
     int flagdisconnected = 0;
 
+
     public Home() {
     }
 
@@ -50,7 +51,7 @@ public class Home extends Fragment {
         v = inflater.inflate(R.layout.home, container, false);
         textInputLayout_url = (TextInputLayout) v.findViewById(R.id.textlayout_url);
         editText_url = (TextInputEditText) v.findViewById(R.id.edittext_url);
-
+        roundbutton = getContext().getResources().getDrawable(R.drawable.roundbutton);
 //        connected= v.findViewById(R.id.textview_connect);
 //        disconnected= v.findViewById(R.id.textview_disconnect);
 //        subscribed = v.findViewById(R.id.textview_subscribe);
@@ -140,15 +141,19 @@ public class Home extends Fragment {
                     case 0:
                         editText_url.setCompoundDrawablesWithIntrinsicBounds(status_red, null, null, null);
                         Connect.setBackgroundColor(0xFFFA3333);
+                        Connect.setBackgroundDrawable(roundbutton);
                         break;
                     case 1:
                         editText_url.setCompoundDrawablesWithIntrinsicBounds(status_green, null, null, null);
                         Connect.setBackgroundColor(0xFF03DAC6);
+                        Connect.setBackgroundDrawable(roundbutton);
                         Disconnect.setBackgroundColor(0xFFFCFAFA);
+                        Disconnect.setBackgroundDrawable(roundbutton);
                         break;
                     case 2:
                         editText_url.setCompoundDrawablesWithIntrinsicBounds(status_black, null, null, null);
                         Connect.setBackgroundColor(0xFFFA3333);
+                        Connect.setBackgroundDrawable(roundbutton);
                         break;
 
 
@@ -167,12 +172,15 @@ public class Home extends Fragment {
                         0xFFFA3333 // red
                         0xFFFCFAFA // White*/
                         Subscribe.setBackgroundColor(0xFFFCFAFA);
+                        Subscribe.setBackgroundDrawable(roundbutton);
                         break;
                     case 1:
                         Subscribe.setBackgroundColor(0xFF03DAC6);
+                        Subscribe.setBackgroundDrawable(roundbutton);
                         break;
                     case 2:
                         Subscribe.setBackgroundColor(0xFF0C0C0C);
+                        Subscribe.setBackgroundDrawable(roundbutton);
 
                         break;
 
@@ -192,14 +200,19 @@ public class Home extends Fragment {
                         0xFFFA3333 // red
                         0xFFFCFAFA // White*/
                         Disconnect.setBackgroundColor(0xFFFCFAFA);
+                        Disconnect.setBackgroundDrawable(roundbutton);
                         break;
                     case 1:
                         Disconnect.setBackgroundColor(0xFF03DAC6);
+                        Disconnect.setBackgroundDrawable(roundbutton);
                         Subscribe.setBackgroundColor(0xFFFCFAFA);
+                        Subscribe.setBackgroundDrawable(roundbutton);
                         Connect.setBackgroundColor(0xFFFCFAFA);
+                        Connect.setBackgroundDrawable(roundbutton);
                         break;
                     case 2:
                         Disconnect.setBackgroundColor(0xFF0C0C0C);
+                        Disconnect.setBackgroundDrawable(roundbutton);
 
                         break;
 
